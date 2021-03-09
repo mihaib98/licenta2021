@@ -1,0 +1,17 @@
+[
+  {
+    "username": "mihai.burduhosu",
+    "password": "mihai1998",
+    "type": "student"
+  },
+  {
+    "username": "admin",
+    "password": "adminSTEPS",
+    "type": "admin"
+  },
+  {
+    "username": "profesor.test",
+    "password": "testprofesor123",
+    "type": "teacher"
+  }
+]

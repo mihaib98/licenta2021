@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ApplicationRoutes} from './services/applicationRoutes';
+import {ApplicationRoutes} from './services/items/applicationRoutes';
 import {LoginComponent} from './commons/components/login/login.component';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'commons'
+    redirectTo: 'home'
   },
   {
     path: ApplicationRoutes.COMMONS_MODULE_PATH,
