@@ -12,4 +12,10 @@ export class ApplicationRoutes {
   public static EVALUATIONS_RESULT = 'evaluations-result';
   public static EVALUATIONS_RESULT_FULL_PATH = ApplicationRoutes.COMMONS_MODULE_PATH + '/' + ApplicationRoutes.EVALUATIONS_RESULT;
 
+  public static ADMINISTRATION = 'administration';
+  public static ADMINISTRATION_FULL_PATH = ApplicationRoutes.COMMONS_MODULE_PATH + '/' + ApplicationRoutes.ADMINISTRATION;
+
+  public static DIDACTIC_EVALUATIONS = 'didactic-evaluations';
+  public static DIDACTIC_EVALUATIONS_FULL_PATH = ApplicationRoutes.COMMONS_MODULE_PATH + '/' + ApplicationRoutes.DIDACTIC_EVALUATIONS;
+
 }

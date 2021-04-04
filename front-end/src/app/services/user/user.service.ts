@@ -1,34 +1,39 @@
 import {Injectable} from '@angular/core';
-import users from "../user/users.json";
 import {Router} from '@angular/router';
+import {Service} from "../service.service";
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  private rootURL: string = 'api/security';
+  private loginPath: string = '/authenticate';
+
   public isLogged: boolean;
   public userModel;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private service: Service) {
   }
 
-  login(username: string, password: string) {
-    for(let user of users){
-      if(user.username === username && user.password === password){
-        this.isLogged = true;
-        this.userModel = user;
-        localStorage.setItem('isLogged', String(true));
-        localStorage.setItem('userType', user.type);
-        this.router.navigateByUrl('/');
-      }
-    }
-    if(!this.isLogged){
-      this.router.navigateByUrl('/login');
-    }
+  login(username: string, password: string): Observable<any> {
+    return this.service.post(this.rootURL + this.loginPath, {
+      username: username,
+      password: password
+    }).pipe(map((response: any) => {
+      return response;
+    }));
   }
 
-  logout(){
+  getTest(): Observable<any> {
+    return this.service.get(this.rootURL).pipe(map((response: any) => {
+      return response;
+    }));
+  }
+
+  logout() {
     localStorage.removeItem('isLogged');
     localStorage.removeItem('userType');
     this.isLogged = false;

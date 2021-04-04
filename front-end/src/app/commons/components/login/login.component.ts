@@ -15,10 +15,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userService.getTest().subscribe(data => {
+      console.log(data);
+    })
   }
 
   authenticate() {
-    this.userService.login(this.username, this.password);
+    this.userService.login(this.username, this.password).subscribe((response) => {
+        console.log(response);
+    })
   }
 
 }

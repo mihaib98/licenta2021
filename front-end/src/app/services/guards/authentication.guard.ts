@@ -12,12 +12,9 @@ export class AuthenticationGuard implements CanActivate {
 
   canActivate(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
+      this.userService.userModel = localStorage.getItem('userType');
+      this.userService.isLogged = Boolean(localStorage.getItem('isLogged'));
       if (this.userService.isLogged === true) {
-        this.userService.userModel = localStorage.getItem('userType');
-        resolve(true);
-      } else if(localStorage.getItem('isLogged')){
-        this.userService.isLogged = true;
-        this.userService.userModel = localStorage.getItem('userType');
         resolve(true);
       } else {
         this.router.navigateByUrl('/login').then();
