@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {ApplicationRoutes} from './services/items/applicationRoutes';
 import {LoginComponent} from './commons/components/login/login.component';
-import {AuthenticationGuard} from './services/guards/authentication.guard';
 import {NotAuthenticationGuard} from './services/guards/not-authentication.guard';
+import {AuthenticationGuard} from "./services/guards/authentication.guard";
 
 const routes: Routes = [
   {
@@ -19,9 +19,10 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.COMMONS_MODULE_PATH,
-    loadChildren: () => import('./commons/commons.module').then(m => m.CommonsModule)
+    loadChildren: () => import('./commons/commons.module').then(m => m.CommonsModule),
+    canActivate: [AuthenticationGuard]
   },
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: 'home'}
 ];
 
 @NgModule({

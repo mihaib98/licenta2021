@@ -1,4 +1,4 @@
-package fii.licenta.stepsbackend.security.dao;
+package fii.licenta.stepsbackend.commons.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 
 	@Column
 	private String username;
@@ -22,6 +22,14 @@ public class User {
 	@Column
 	@JsonIgnore
 	private String password;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;

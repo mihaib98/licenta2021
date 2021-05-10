@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Service} from "../service.service";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {SecurityStorage} from "./security.storage";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class UserService {
   public isLogged: boolean;
   public userModel;
 
-  constructor(private router: Router, private service: Service) {
+  constructor(private router: Router, private service: Service, private securityStorage: SecurityStorage) {
   }
 
   login(username: string, password: string): Observable<any> {
@@ -23,20 +24,22 @@ export class UserService {
       username: username,
       password: password
     }).pipe(map((response: any) => {
+      this.securityStorage.store(response.token);
+      this.getUser();
       return response;
     }));
   }
 
-  getTest(): Observable<any> {
-    return this.service.get(this.rootURL).pipe(map((response: any) => {
+  getUser(): Observable<any> {
+    return this.service.get(this.rootURL + this.loginPath).pipe(map((response: any) => {
+      this.userModel = 'teacher';
+      this.isLogged = true;
       return response;
     }));
   }
 
   logout() {
-    localStorage.removeItem('isLogged');
-    localStorage.removeItem('userType');
-    this.isLogged = false;
+    this.securityStorage.clear();
     this.router.navigateByUrl('/login');
   }
 }

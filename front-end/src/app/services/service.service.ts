@@ -3,6 +3,7 @@ import {UserService} from "./user/user.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
+import {SecurityStorage} from "./user/security.storage";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class Service {
 
   userService: UserService;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private securityStorage: SecurityStorage) {
   }
 
   setUserService(userService: UserService) {
@@ -22,13 +23,14 @@ export class Service {
   private headers(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
-      'Access-Control-Allow-Origin': '*',
+      Authorization: 'Bearer ' + this.securityStorage.getStored(),
       'lang': 'ro'
     });
   }
 
   processURL(url: string): string {
     url = url.replace('api', environment.API_ENDPOINT);
+    console.log(url);
     return url;
   }
 

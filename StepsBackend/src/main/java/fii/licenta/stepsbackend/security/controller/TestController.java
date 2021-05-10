@@ -10,9 +10,12 @@ import fii.licenta.stepsbackend.security.dto.AuthenticationRecord;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-	@GetMapping()
-	public ResponseEntity<?> smth(){
+	
+	@GetMapping
+	public ResponseEntity<?> smth() {
 		AuthenticationRecord a = new AuthenticationRecord();
+		a.setUsername("ok");
+		a.setPassword("bine");
 		return ResponseEntity.ok(a);
 	}
 }
